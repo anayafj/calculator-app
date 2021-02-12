@@ -1,0 +1,4 @@
+.pad-button {
+	display: flex;
+	flex-grow: 4;
+}

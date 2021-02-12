@@ -1,0 +1,9 @@
+.number-pad {
+	display: flex;
+	flex-wrap: wrap;
+	overflow: hidden;
+}
+
+.row {
+	display: flex;
+}
