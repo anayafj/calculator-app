@@ -1,3 +1,4 @@
+import './App.css';
 import React, { Component } from 'react';
 
 import NumberDisplay from './NumberDisplay';
@@ -20,7 +21,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="ui container">
+			<div className="app-container">
 				<NumberDisplay displayNumber={this.state.number} />
 				<NumberPad />
 			</div>
