@@ -33,7 +33,7 @@ class App extends Component {
 			// check if operator is special
 			switch (padOperators.indexOf(selection)) {
 				case 0:
-					console.log('CLEAR');
+					// AC
 					this.setState({
 						numbers: [],
 						opertaters: [],
@@ -41,23 +41,18 @@ class App extends Component {
 					});
 					break;
 				case 1:
-					console.log('Negative/positive');
+					// +/-
 					this.setState({ number: String(Number(currentNum) * -1) });
 					break;
 				case 2:
-					console.log('%', currentNum.indexOf('.'));
-					if (currentNum.indexOf('.') === -1) {
-						console.log('No decimal found. find percentage');
-						this.setState({ number: currentNum / 100 });
-					}
+					// %
+					if (currentNum.indexOf('.') === -1)
+						this.setState({ number: String(currentNum / 100) });
 					break;
 				case 7:
-					console.log('.');
-					// check if there is already a decimal. if so ignore
-					if (currentNum.indexOf('.') === -1) {
-						console.log('No decimal found. Add it');
+					// .
+					if (currentNum.indexOf('.') === -1)
 						this.setState({ number: currentNum.concat(selection) });
-					}
 					break;
 				case 8:
 					console.log('Calculate');
@@ -77,7 +72,7 @@ class App extends Component {
 	};
 
 	componentDidUpdate() {
-		console.log('Concat number = ', this.state.number);
+		console.log('State of number = ', this.state.number);
 	}
 
 	render() {
