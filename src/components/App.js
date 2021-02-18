@@ -34,13 +34,22 @@ class App extends Component {
 			switch (padOperators.indexOf(selection)) {
 				case 0:
 					console.log('CLEAR');
+					this.setState({
+						numbers: [],
+						opertaters: [],
+						number: '0',
+					});
 					break;
 				case 1:
 					console.log('Negative/positive');
 					this.setState({ number: String(Number(currentNum) * -1) });
 					break;
 				case 2:
-					console.log('%');
+					console.log('%', currentNum.indexOf('.'));
+					if (currentNum.indexOf('.') === -1) {
+						console.log('No decimal found. find percentage');
+						this.setState({ number: currentNum / 100 });
+					}
 					break;
 				case 7:
 					console.log('.');
@@ -56,7 +65,6 @@ class App extends Component {
 				default:
 					console.log('Default');
 			}
-			console.log('Not a number');
 		}
 	};
 
