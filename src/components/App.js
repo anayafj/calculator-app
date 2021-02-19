@@ -1,11 +1,17 @@
 import './App.css';
 import React, { Component } from 'react';
 
+import {
+	Calculation,
+	onCal,
+	padNumbers,
+	padOperators,
+} from './scripts/Calculation';
 import NumberDisplay from './NumberDisplay';
 import NumberPad from './NumberPad';
 
-const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
+// const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
 let operatorSelected = false;
 let calculateEquation = false;
 // let newEquation = true;
@@ -122,69 +128,75 @@ class App extends Component {
 		console.log('Number selected', selection);
 	};
 
-	onCalculation = () => {
-		console.log('Equation State - ', this.state);
-		calculateEquation = false;
-		let result = 0;
+	// onCalculation = () => {
+	// 	console.log('Equation State - ', this.state);
+	// 	Calculation(this.state);
+	// 	calculateEquation = false;
+	// 	let result = 0;
 
-		const checkEquationToUse = (operandIndex, number) => {
-			// console.log('operandIndex = ', operandIndex);
-			// console.log('number = ', number);
-			switch (operandIndex) {
-				case 3:
-					console.log(' operand = DIVIDE');
-					result = divideNumbers(result, number);
-					break;
-				case 4:
-					console.log(' operand = MULTIPLY');
-					result = multiplyNumbers(result, number);
-					break;
-				case 5:
-					console.log(' operand = SUBTRACT');
-					result = subtractNumbers(result, number);
-					break;
-				case 6:
-					console.log(' operand = ADD');
-					result = addNumbers(result, number);
-					break;
-				default:
-					console.log('Ready for Result');
-					break;
-			}
-		};
+	// 	const checkEquationToUse = (operandIndex, number) => {
+	// 		// console.log('operandIndex = ', operandIndex);
+	// 		// console.log('number = ', number);
+	// 		switch (operandIndex) {
+	// 			case 3:
+	// 				console.log(' operand = DIVIDE');
+	// 				result = divideNumbers(result, number);
+	// 				break;
+	// 			case 4:
+	// 				console.log(' operand = MULTIPLY');
+	// 				result = multiplyNumbers(result, number);
+	// 				break;
+	// 			case 5:
+	// 				console.log(' operand = SUBTRACT');
+	// 				result = subtractNumbers(result, number);
+	// 				break;
+	// 			case 6:
+	// 				console.log(' operand = ADD');
+	// 				result = addNumbers(result, number);
+	// 				break;
+	// 			default:
+	// 				console.log('Ready for Result');
+	// 				break;
+	// 		}
+	// 	};
 
-		const addNumbers = (a, b) => {
-			return a + b;
-		};
+	// 	const addNumbers = (a, b) => {
+	// 		return a + b;
+	// 	};
 
-		const subtractNumbers = (a, b) => {
-			return a - b;
-		};
+	// 	const subtractNumbers = (a, b) => {
+	// 		return a - b;
+	// 	};
 
-		const divideNumbers = (a, b) => {
-			return a / b;
-		};
+	// 	const divideNumbers = (a, b) => {
+	// 		return a / b;
+	// 	};
 
-		const multiplyNumbers = (a, b) => {
-			return a * b;
-		};
+	// 	const multiplyNumbers = (a, b) => {
+	// 		return a * b;
+	// 	};
 
-		for (let i = 0; i < this.state.numbers.length; i++) {
-			console.log(i);
-			if (i === 0) {
-				result = Number(this.state.numbers[i]);
-			} else if (i === this.state.operators.length) {
-				break;
-			}
+	// 	for (let i = 0; i < this.state.numbers.length; i++) {
+	// 		console.log(i);
+	// 		if (i === 0) {
+	// 			result = Number(this.state.numbers[i]);
+	// 		} else if (i === this.state.operators.length) {
+	// 			break;
+	// 		}
 
-			checkEquationToUse(
-				padOperators.indexOf(this.state.operators[i]),
-				Number(this.state.numbers[i + 1]),
-			);
-		}
+	// 		checkEquationToUse(
+	// 			padOperators.indexOf(this.state.operators[i]),
+	// 			Number(this.state.numbers[i + 1]),
+	// 		);
+	// 	}
 
-		console.log('Equation Solved = ', result);
-		this.displayCalculatedResults(result);
+	// 	console.log('Equation Solved = ', result);
+	// 	this.displayCalculatedResults(result);
+	// };
+
+	onCalculation = (equation) => {
+		console.log('onCalculation : equation = ', equation);
+		this.displayCalculatedResults(Calculation(equation));
 	};
 
 	displayCalculatedResults = (results) => {
@@ -198,10 +210,13 @@ class App extends Component {
 	};
 
 	componentDidUpdate() {
-		// console.log('State of number = ', this.state.number);
 		console.log('State - ', this.state);
 
-		if (calculateEquation) this.onCalculation();
+		// called only when '=' button pressed
+		if (calculateEquation) {
+			calculateEquation = false;
+			this.onCalculation(this.state);
+		}
 	}
 
 	render() {
