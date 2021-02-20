@@ -9,7 +9,7 @@ class NumberButton extends Component {
 	};
 
 	render() {
-		const { name, onButtonPress } = this.props;
+		const { name } = this.props;
 
 		return (
 			<div className="pad-button">

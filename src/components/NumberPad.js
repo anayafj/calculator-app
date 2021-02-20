@@ -1,6 +1,7 @@
 import './NumberPad.css';
 import React, { Component } from 'react';
 
+// import { ButtonPress } from './scripts/ButtonPress';
 import NumberButton from './NumberButton';
 
 class NumberPad extends Component {
@@ -8,10 +9,11 @@ class NumberPad extends Component {
 
 	onButtonPress = (e) => {
 		this.props.buttonSelected(e);
+		// this.props.ButtonPress(e);
 	};
 
 	render() {
-		const { buttonSelected, padNum, padOper } = this.props;
+		const { padNum, padOper } = this.props;
 
 		return (
 			<div className="number-pad">

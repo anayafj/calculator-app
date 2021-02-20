@@ -3,7 +3,8 @@ import React from 'react';
 const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
 let result = null;
-// let calculateEquation = false;
+let operatorSelected = false;
+let calculateEquation = false;
 
 function Calculation(equation, displayCalculatedResults) {
 	console.log('Make Calculation called', equation);
@@ -74,4 +75,11 @@ function onCal(equation) {
 	return;
 }
 
-export { Calculation, onCal, padNumbers, padOperators };
+export {
+	Calculation,
+	onCal,
+	padNumbers,
+	padOperators,
+	calculateEquation,
+	operatorSelected,
+};
