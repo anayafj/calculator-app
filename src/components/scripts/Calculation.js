@@ -1,30 +1,32 @@
 import React from 'react';
 
-const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
-let result = null;
-let operatorSelected = false;
-let calculateEquation = false;
+import * as Constants from './ConstantVariables';
+// const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+// const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
+// let result = null;
+// let operatorSelected = false;
+// let calculateEquation = false;
 
 function Calculation(equation, displayCalculatedResults) {
 	console.log('Make Calculation called', equation);
 
-	result = null; // reset results to null
+	Constants.result = null; // reset results to null
 
 	for (let i = 0; i < equation.numbers.length; i++) {
 		if (i === 0) {
-			result = Number(equation.numbers[i]);
+			Constants.result = Number(equation.numbers[i]);
 		} else if (i === equation.operators.length) {
 			break;
 		}
 
 		checkEquationToUse(
-			padOperators.indexOf(equation.operators[i]),
+			Constants.padOperators.indexOf(equation.operators[i]),
+			// padOperators.indexOf(equation.operators[i]),
 			Number(equation.numbers[i + 1]),
 		);
 	}
 
-	displayCalculatedResults(result);
+	displayCalculatedResults(Constants.result);
 }
 
 // function to see what type of equation to use
@@ -32,19 +34,19 @@ const checkEquationToUse = (operandIndex, number) => {
 	switch (operandIndex) {
 		case 3:
 			// console.log(' operand = DIVIDE');
-			result = divideNumbers(result, number);
+			Constants.result = divideNumbers(Constants.result, number);
 			break;
 		case 4:
 			// console.log(' operand = MULTIPLY');
-			result = multiplyNumbers(result, number);
+			Constants.result = multiplyNumbers(Constants.result, number);
 			break;
 		case 5:
 			// console.log(' operand = SUBTRACT');
-			result = subtractNumbers(result, number);
+			Constants.result = subtractNumbers(Constants.result, number);
 			break;
 		case 6:
 			// console.log(' operand = ADD');
-			result = addNumbers(result, number);
+			Constants.result = addNumbers(Constants.result, number);
 			break;
 		default:
 			console.log('Ready for Result');
@@ -70,16 +72,12 @@ const multiplyNumbers = (a, b) => {
 };
 // Equations ------------------------<< //
 
-function onCal(equation) {
-	console.log('Calculate button hit');
-	return;
-}
+// export {
+// 	Calculation,
+// 	padNumbers,
+// 	padOperators,
+// 	calculateEquation,
+// 	operatorSelected,
+// };
 
-export {
-	Calculation,
-	onCal,
-	padNumbers,
-	padOperators,
-	calculateEquation,
-	operatorSelected,
-};
+export default Calculation;

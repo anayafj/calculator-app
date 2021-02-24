@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 class NumberButton extends Component {
 	buttonClicked = (e) => {
 		e.preventDefault();
-		// console.log('Button clicked now', e.target.id);
 		this.props.onButtonPress(e.target.id);
 	};
 

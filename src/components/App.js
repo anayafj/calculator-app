@@ -1,14 +1,15 @@
 import './App.css';
 import React, { Component } from 'react';
 
-import {
-	Calculation,
-	onCal,
-	padNumbers,
-	padOperators,
-	calculateEquation,
-	operatorSelected,
-} from './scripts/Calculation';
+import { calculateEquation } from './scripts/ConstantVariables';
+import Calculation from './scripts/Calculation';
+// import {
+// 	Calculation,
+// 	padNumbers,
+// 	padOperators,
+// 	calculateEquation,
+// 	operatorSelected,
+// } from './scripts/Calculation';
 import { ButtonPress } from './scripts/ButtonPress';
 import NumberDisplay from './NumberDisplay';
 import NumberPad from './NumberPad';
@@ -26,7 +27,18 @@ class App extends Component {
 	};
 
 	buttonSelected = (selection) => {
-		ButtonPress(selection, this.state);
+		ButtonPress(selection, this.state, this.changeState);
+	};
+
+	changeState = (state, variable) => {
+		console.log('Change state ---- state = ', state);
+		console.log('Change state ---- variable = ', variable);
+
+		switch (state) {
+			case 'number':
+				this.setState({ number: variable });
+				break;
+		}
 	};
 
 	// buttonSelected = (selection) => {
@@ -161,9 +173,10 @@ class App extends Component {
 			<div className="app-container">
 				<NumberDisplay displayNumber={this.state.number} />
 				<NumberPad
-					padNum={padNumbers}
-					padOper={padOperators}
+					// padNum={padNumbers}
+					// padOper={padOperators}
 					buttonSelected={this.buttonSelected}
+					// changeState={this.changeState}
 					// buttonSelected={ButtonPress}
 					// state={this.state}
 				/>
