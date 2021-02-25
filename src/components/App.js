@@ -38,6 +38,29 @@ class App extends Component {
 			case 'number':
 				this.setState({ number: variable });
 				break;
+			case 'numbers':
+				this.setState((state) => {
+					const numbers = [...state.numbers, variable];
+					return { numbers };
+				});
+				break;
+			case 'operators':
+				console.log('changeState - operators');
+				this.setState((state) => {
+					const operators = [...state.operators, variable];
+					// console.log('changeState - operators - operators = ', operators);
+					return { operators };
+				});
+			case 'reset':
+				this.setState({
+					numbers: [],
+					operators: [],
+					number: '0',
+				});
+				break;
+			default:
+				console.log('changeState - ERROR');
+				break;
 		}
 	};
 

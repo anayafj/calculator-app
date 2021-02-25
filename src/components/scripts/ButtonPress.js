@@ -9,14 +9,12 @@ import * as Constants from './ConstantVariables';
 
 function ButtonPress(selection, state, changeState) {
 	console.log('Button Press file - selection = ', selection);
-	// console.log('Button Press - state = ', state);
 	const currentNum = state.number;
-	// console.log('Button Press - currentNum = ', currentNum);
 
 	if (!isNaN(Number(selection))) {
 		updateForNumber(currentNum, selection, changeState);
 	} else {
-		updateForOperand(selection, changeState);
+		updateForOperand(currentNum, selection, changeState);
 	}
 
 	// if (!isNaN(Number(selection))) {
@@ -126,21 +124,20 @@ const updateForNumber = (currentNum, selection, changeState) => {
 
 	const currentNumber = Number(currentNum);
 
-	// check if first number is 0. If so replace.
+	// check if first number is 0. If so replace it unless selection is 0.
 	if (currentNumber == 0 && currentNum.length <= 1) {
-		if (Constants.operatorSelected) Constants.operatorSelected = false;
-		console.log(
-			'Number is 0, replace it with selection',
-			Constants.operatorSelected,
-		);
-		changeState('number', selection);
+		if (Constants.operatorSelected) Constants.setOperatorSelected(false);
+		console.log('Number is 0, replace it with selection');
+		if (Number(selection) != currentNumber) changeState('number', selection);
 	} else {
 		// look to see if new number needs to start
 		if (Constants.operatorSelected) {
 			// new number. just set
-			console.log('new number, replace 0 with selection');
+			console.log(
+				'**********    new number, replace 0 with selection  **************',
+			);
 			changeState('number', selection);
-			Constants.operatorSelected = false;
+			Constants.setOperatorSelected(false);
 		} else {
 			// if number then add to end of state number
 			console.log('concat to current number');
@@ -150,33 +147,65 @@ const updateForNumber = (currentNum, selection, changeState) => {
 };
 
 // If button selected is a operator
-const updateForOperand = (selection, changeState) => {
+const updateForOperand = (currentNum, selection, changeState) => {
 	console.log("It's a Operand!");
 
 	const operatorIndex = Constants.padOperators.indexOf(selection);
+	Constants.setOperatorSelected(true);
 
-	// if (Constants.operatorSelected) {
-	// 	if (operatorIndex == 0 || operatorIndex == 7) {
-	// 		// check if operator is special
-	// 		switch (operatorIndex) {
-	// 			case 0:
-	// 				// AC
-	// 				this.setState({
-	// 					numbers: [],
-	// 					operators: [],
-	// 					number: '0',
-	// 				});
-	// 				break;
-	// 			case 7:
-	// 				// .
-	// 				if (currentNum.indexOf('.') === -1)
-	// 					this.setState({ number: currentNum.concat(selection) });
-	// 				break;
-	// 		}
-	// 	}
-	// 	operatorSelected = false;
-	// 	return;
-	// }
+	switch (operatorIndex) {
+		case 0:
+			Constants.setOperatorSelected(false);
+			changeState('reset', null);
+			break;
+		case 1:
+			// +/-
+			Constants.setOperatorSelected(false);
+			changeState('number', String(Number(currentNum) * -1));
+			break;
+		case 2:
+			// %
+			if (currentNum.indexOf('.') === -1) {
+				// this.setState({ number: String(currentNum / 100) });
+				// Constants.setOperatorSelected(false);
+				changeState('number', String(currentNum / 100));
+			}
+			break;
+		case 7:
+			// .
+			if (currentNum.indexOf('.') === -1) {
+				Constants.setOperatorSelected(false);
+				changeState('number', currentNum.concat(selection));
+			}
+			break;
+		// case 8:
+		// 	console.log('Calculate');
+
+		// 	calculateEquation = true;
+		// 	this.setState((state) => {
+		// 		const numbers = [...state.numbers, state.number];
+		// 		return { numbers };
+		// 	});
+		// 	break;
+		default:
+			console.log('Default');
+			// all other operators: ÷, x, -, +
+			// operatorSelected = true;
+
+			// this.setState((state) => {
+			// 	const numbers = state.numbers.concat(currentNum);
+			// 	const operators = state.operators.concat(selection);
+
+			// 	return {
+			// 		numbers,
+			// 		operators,
+			// 	};
+			// });
+
+			// changeState('numbers', currentNum);
+			changeState('operators', String(selection));
+			break;
+	}
 };
 
 export { ButtonPress };
