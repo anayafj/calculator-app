@@ -1,11 +1,5 @@
-import React from 'react';
-
 import * as Constants from './ConstantVariables';
-// const padNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-// const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
-// let result = null;
-// let operatorSelected = false;
-// let calculateEquation = false;
+// const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '=', 'C'];
 
 // Calculate equation --------------------------------
 function Calculation(equation, displayCalculatedResults) {

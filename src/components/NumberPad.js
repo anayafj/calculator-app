@@ -2,25 +2,22 @@ import './NumberPad.css';
 import React, { Component } from 'react';
 
 import { padNumbers, padOperators } from './scripts/ConstantVariables';
-// import { ButtonPress } from './scripts/ButtonPress';
 import NumberButton from './NumberButton';
 
 class NumberPad extends Component {
-	// state = { num : null, operator: ''}
+	state = { clearBtn: padOperators[0] };
 
 	onButtonPress = (e) => {
 		this.props.buttonSelected(e);
-		// this.props.ButtonPress(e);
 	};
 
 	render() {
-		// const { padNumbers, padOper } = this.props;
-
 		return (
 			<div className="number-pad">
 				<div className="row">
 					<NumberButton
-						name={padOperators[0]}
+						// name={padOperators[0]}
+						name={this.state.clearBtn}
 						onButtonPress={this.onButtonPress}
 					/>
 					<NumberButton
