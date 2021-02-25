@@ -3,6 +3,7 @@ export const padOperators = ['AC', '+/-', '%', '÷', 'x', '-', '+', '.', '='];
 export let result = null;
 export let operatorSelected = false;
 export let calculateEquation = false;
+export let equationSolved = false;
 
 export const setResults = (newResults) => {
 	console.log('Updating results');
@@ -17,4 +18,9 @@ export const setOperatorSelected = (boolean) => {
 export const setCalculateEquation = (boolean) => {
 	console.log('Updating calculateEquation = ', boolean);
 	calculateEquation = boolean;
+};
+
+export const setEquationSolved = (boolean) => {
+	console.log('Updating equationSolved');
+	equationSolved = boolean;
 };

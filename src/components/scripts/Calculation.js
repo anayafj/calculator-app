@@ -7,21 +7,21 @@ import * as Constants from './ConstantVariables';
 // let operatorSelected = false;
 // let calculateEquation = false;
 
+// Calculate equation --------------------------------
 function Calculation(equation, displayCalculatedResults) {
 	console.log('Make Calculation called', equation);
 
-	Constants.result = null; // reset results to null
+	Constants.setResults(null); // reset results to null
 
 	for (let i = 0; i < equation.numbers.length; i++) {
 		if (i === 0) {
-			Constants.result = Number(equation.numbers[i]);
+			Constants.setResults(Number(equation.numbers[i]));
 		} else if (i === equation.operators.length) {
 			break;
 		}
 
 		checkEquationToUse(
 			Constants.padOperators.indexOf(equation.operators[i]),
-			// padOperators.indexOf(equation.operators[i]),
 			Number(equation.numbers[i + 1]),
 		);
 	}
@@ -34,19 +34,19 @@ const checkEquationToUse = (operandIndex, number) => {
 	switch (operandIndex) {
 		case 3:
 			// console.log(' operand = DIVIDE');
-			Constants.result = divideNumbers(Constants.result, number);
+			Constants.setResults(divideNumbers(Constants.result, number));
 			break;
 		case 4:
 			// console.log(' operand = MULTIPLY');
-			Constants.result = multiplyNumbers(Constants.result, number);
+			Constants.setResults(multiplyNumbers(Constants.result, number));
 			break;
 		case 5:
 			// console.log(' operand = SUBTRACT');
-			Constants.result = subtractNumbers(Constants.result, number);
+			Constants.setResults(subtractNumbers(Constants.result, number));
 			break;
 		case 6:
 			// console.log(' operand = ADD');
-			Constants.result = addNumbers(Constants.result, number);
+			Constants.setResults(addNumbers(Constants.result, number));
 			break;
 		default:
 			console.log('Ready for Result');

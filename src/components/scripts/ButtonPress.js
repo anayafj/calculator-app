@@ -112,16 +112,9 @@ function ButtonPress(selection, state, changeState) {
 	// }
 }
 
-// const changeNumberState = (selection, changeState) => {
-// 	console.log('Changing state of number');
-// 	changeState('number', selection);
-// 	// this.setState({ number: selection });
-// };
-
 // If button selected is a number
 const updateForNumber = (currentNum, selection, changeState) => {
 	console.log("It's a Number!");
-
 	const currentNumber = Number(currentNum);
 
 	// check if first number is 0. If so replace it unless selection is 0.
@@ -134,7 +127,7 @@ const updateForNumber = (currentNum, selection, changeState) => {
 		if (Constants.operatorSelected) {
 			// new number. just set
 			console.log(
-				'**********    new number, replace 0 with selection  **************',
+				'**********    new number, replace 0 with selection  *********',
 			);
 			changeState('number', selection);
 			Constants.setOperatorSelected(false);
@@ -166,7 +159,6 @@ const updateForOperand = (currentNum, selection, changeState) => {
 		case 2:
 			// %
 			if (currentNum.indexOf('.') === -1) {
-				// this.setState({ number: String(currentNum / 100) });
 				// Constants.setOperatorSelected(false);
 				changeState('number', String(currentNum / 100));
 			}
@@ -178,31 +170,22 @@ const updateForOperand = (currentNum, selection, changeState) => {
 				changeState('number', currentNum.concat(selection));
 			}
 			break;
-		// case 8:
-		// 	console.log('Calculate');
+		case 8:
+			console.log('Calculate - currentNum = ', currentNum);
 
-		// 	calculateEquation = true;
-		// 	this.setState((state) => {
-		// 		const numbers = [...state.numbers, state.number];
-		// 		return { numbers };
-		// 	});
-		// 	break;
-		default:
-			console.log('Default');
-			// all other operators: ÷, x, -, +
-			// operatorSelected = true;
-
+			// calculateEquation = true;
 			// this.setState((state) => {
-			// 	const numbers = state.numbers.concat(currentNum);
-			// 	const operators = state.operators.concat(selection);
-
-			// 	return {
-			// 		numbers,
-			// 		operators,
-			// 	};
+			// 	const numbers = [...state.numbers, state.number];
+			// 	return { numbers };
 			// });
+			Constants.setCalculateEquation(true);
+			changeState('numbers', currentNum);
+			break;
+		default:
+			// console.log('Default');
+			// all other operators: ÷, x, -, +
 
-			// changeState('numbers', currentNum);
+			changeState('numbers', currentNum);
 			changeState('operators', String(selection));
 			break;
 	}

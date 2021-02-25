@@ -1,7 +1,12 @@
 import './App.css';
 import React, { Component } from 'react';
 
-import { calculateEquation } from './scripts/ConstantVariables';
+import {
+	calculateEquation,
+	setCalculateEquation,
+	equationSolved,
+	setEquationSolved,
+} from './scripts/ConstantVariables';
 import Calculation from './scripts/Calculation';
 // import {
 // 	Calculation,
@@ -30,6 +35,7 @@ class App extends Component {
 		ButtonPress(selection, this.state, this.changeState);
 	};
 
+	// Change state on button press ------
 	changeState = (state, variable) => {
 		console.log('Change state ---- state = ', state);
 		console.log('Change state ---- variable = ', variable);
@@ -45,12 +51,11 @@ class App extends Component {
 				});
 				break;
 			case 'operators':
-				console.log('changeState - operators');
 				this.setState((state) => {
 					const operators = [...state.operators, variable];
-					// console.log('changeState - operators - operators = ', operators);
 					return { operators };
 				});
+				break;
 			case 'reset':
 				this.setState({
 					numbers: [],
@@ -173,7 +178,8 @@ class App extends Component {
 	// Get results and change state to display ------
 	displayCalculatedResults = (results) => {
 		console.log('Display results - ', results);
-		// newEquation = true;
+		setEquationSolved(true);
+
 		this.setState({
 			numbers: [],
 			operators: [],
@@ -186,7 +192,7 @@ class App extends Component {
 
 		// called only when '=' button pressed
 		if (calculateEquation) {
-			calculateEquation = false;
+			setCalculateEquation(false);
 			Calculation(this.state, this.displayCalculatedResults);
 		}
 	}
@@ -195,14 +201,7 @@ class App extends Component {
 		return (
 			<div className="app-container">
 				<NumberDisplay displayNumber={this.state.number} />
-				<NumberPad
-					// padNum={padNumbers}
-					// padOper={padOperators}
-					buttonSelected={this.buttonSelected}
-					// changeState={this.changeState}
-					// buttonSelected={ButtonPress}
-					// state={this.state}
-				/>
+				<NumberPad buttonSelected={this.buttonSelected} />
 			</div>
 		);
 	}
