@@ -1,4 +1,4 @@
-import './NumberPad.css';
+import '../stylesheets/components/NumberPad.scss';
 import React, { Component } from 'react';
 
 import { padNumbers, padOperators } from './scripts/ConstantVariables';

@@ -1,0 +1,22 @@
+@import '../utils/variables';
+
+.number-display {
+	display: flex;
+	flex-direction: row-reverse;
+	min-height: 80px;
+	background-color: $displayBackgroundColor;
+	overflow: hidden;
+
+	.number {
+		display: flex;
+		align-items: center;
+		// width: 300px;
+		// padding-left: 5px;
+		padding-right: 5px;
+		font-size: 3em;
+		// text-size-adjust: 80%;
+		// font-size: clamp(1rem, -0.875rem + 8.333vw, 3.5rem);
+		font-weight: bolder;
+		color: $displayTextColor;
+	}
+}

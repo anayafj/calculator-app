@@ -1,0 +1,7 @@
+@import '../utils/variables';
+
+.app-container {
+	width: $appWidth !important;
+	height: $appHeight !important;
+	background-color: $appBackgroundColor;
+}

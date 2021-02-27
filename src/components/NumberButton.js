@@ -1,4 +1,4 @@
-import './NumberButton.css';
+import '../stylesheets/components/NumberButton.scss';
 import React, { Component } from 'react';
 
 class NumberButton extends Component {

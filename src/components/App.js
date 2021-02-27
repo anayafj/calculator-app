@@ -1,5 +1,6 @@
-import './App.css';
+import '../stylesheets/components/App.scss';
 import React, { Component } from 'react';
+// import classnames from 'classnames';
 
 import {
 	calculateEquation,
@@ -76,6 +77,7 @@ class App extends Component {
 	}
 
 	render() {
+		// let appClasses = classnames('app-container');
 		return (
 			<div className="app-container">
 				<NumberDisplay displayNumber={this.state.number} />

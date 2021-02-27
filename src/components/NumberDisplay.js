@@ -1,4 +1,4 @@
-import './NumberDisplay.css';
+import '../stylesheets/components/NumberDisplay.scss';
 import React, { Component } from 'react';
 
 class NumberDisplay extends Component {
@@ -6,7 +6,8 @@ class NumberDisplay extends Component {
 	render() {
 		const displayNumber = this.props.displayNumber;
 		return (
-			<div className="number-display ui segment">
+			// <div className="number-display ui segment"></div>
+			<div className="number-display">
 				<div className="number">{displayNumber}</div>
 			</div>
 		);
