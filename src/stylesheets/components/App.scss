@@ -1,7 +1,19 @@
-@import '../utils/variables';
+// @import '../utils/variables';
+
+// APP Setup
+$appWidth: 300px;
+$appHeight: 380px;
+$appBackgroundColor: Lightblue;
+$appBorderColor: #252525;
 
 .app-container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	width: $appWidth !important;
 	height: $appHeight !important;
-	background-color: $appBackgroundColor;
+	border: 1px solid $appBorderColor;
+	border-radius: 5px;
+	// background-color: $appBackgroundColor;
 }

@@ -1,9 +1,17 @@
 .number-pad {
 	display: flex;
 	flex-wrap: wrap;
-	overflow: hidden;
+	width: 100%;
+	padding: 14px 9px;
 }
 
 .row {
 	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin-bottom: 5px;
+
+	&:last-child {
+		margin-bottom: 0;
+	}
 }

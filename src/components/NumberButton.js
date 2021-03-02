@@ -7,15 +7,29 @@ class NumberButton extends Component {
 		this.props.onButtonPress(e.target.id);
 	};
 
+	componentDidUpdate() {}
+
 	render() {
 		const { name } = this.props;
+		const classNameGrow = 'itemGrow';
+		const classNameOperand = 'operand';
+		const classNameHeader = 'topOperands';
+		let className = '';
+
+		if (name === 0) {
+			console.log('name = ', name);
+			className = classNameGrow;
+		}
 
 		return (
-			<div className="pad-button">
-				<button className="ui button" id={name} onClick={this.buttonClicked}>
-					{name}
-				</button>
-			</div>
+			<button
+				type="button"
+				className={className}
+				id={name}
+				onClick={this.buttonClicked}
+			>
+				{name}
+			</button>
 		);
 	}
 }
